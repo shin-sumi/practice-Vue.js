@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>Vue.js App</title>
+  <link href="main.css" rel="stylesheet">
+</head>
+<body>
+  <div id="app">
+    <ul>
+      <!-- 繰り返したい要素にv-forディレクティブを使用 -->
+      <li v-for="item in list" v-bind:key="item.id">
+        ID.{{ item.id }} {{ item.name }} HP.{{ item.hp }}
+      </li>
+    </ul>
+    <ul>
+      <!-- 以下のようにすればindexもうけとれる -->
+      <li v-for="(item, index) in list" v-bind:key="item.id">
+        {{ index }} {{ item.name }} {{ item.hp }}
+        <button v-on:click="doRemove(index)">モンスター削除</button>
+      </li>
+    </ul>
+
+    <ul>
+      <!--
+        オブジェクトの場合、「値」「キー」「インデックス」の順で任意にうけとれる
+        しかし、オブジェクトを反復処理する場合、Object.keysの列挙順のキーに基づいており、全てのJavaScriptエンジンで一貫性が保証されているわけではない
+      -->
+      <li v-for="(item, key, index) in obj" v-bind:key="item.id">
+        index.{{ index }} key.{{ key }} 値.{{ item }}
+      </li>
+    </ul>
+    <!-- 
+        v-forディレクティブを使用時はユニークなkey属性を設定することが推奨されている
+        例えばlistの最初の要素を削除した場合、
+        keyがないと、順序が変わった要素全てに変更がかかるが、
+        keyがある場合、消えたkeyのDOMが削除されるだけ。
+
+        また、keyは不変でユニークである必要がある。
+        配列のインデックスなどはユニークではあるが、要素が増減、順序が変更する可能性があるので不変ではない
+
+        さらに以下のように同一の親要素内でキーの重複はできずエラーになる
+        <ul>
+          <li v-for="item in list" v-bind:key="item.id">
+          <li v-for="item in list" v-bind:key="item.id">
+        </ul>
+      -->
+
+      <!-- v-forディレクティブと他のディレクティブの組み合わせで、条件を適用 -->
+      <ul>
+        <li v-for="item in list"
+            v-bind:key="item.id"
+            v-bind:class="{tsuyoi: item.hp > 300}">
+          ID. {{ item.id }} {{ item.name }} HP. {{ item.hp }} 
+          <span v-if="item.hp > 300">つよい</span>
+        </li>
+      </ul>
+      <ul>
+        <!-- v-forディレクティブを使用している要素に直接v-ifディレクティブを使用して要素の描画自体を操作 -->
+        <li v-for="item in list" v-bind:key="item.id" v-if="item.hp < 300">
+          ID. {{ item.id }} {{ item.name }} HP. {{ item.hp }}
+        </li>
+      </ul>
+
+      <!--
+        配列の更新
+        以下のようなインデックスを使った配列要素の更新はNG
+          this.list[0] = 'new'
+        pushやunshiftメソッドはOK
+      -->
+      <button v-on:click="strengthen">強く</button>
+      <button v-on:click="doAdd">モンスターを追加</button>
+      <button v-on:click="doChange">モンスターを入れ替え</button>
+      <ul>
+        <li v-for="(item, index) in list" v-bind:key="item.id" v-if="item.hp">
+          ID.{{ item.id }} {{ item.name }} HP.{{ item.hp }}
+          <span v-if="item.hp < 50">瀕死</span>
+          <button v-on:click="doAttack(index)">攻撃</button>
+        </li>
+      </ul>
+      <button v-on:click="doFilter">listを入れ替え</button>
+      <select>
+        <!-- ユニークキーを持たない単純な配列は操作するには不向きだが、表示するだけならシンプルにかける -->
+        <option v-for="item in simpleList">
+          {{ item }}
+        </option>
+      </select>
+      <!-- v-forに範囲や配列リテラルを直接使用できる -->
+      <div>
+        <span v-for="item in 15">
+          {{ item }}
+        </span>
+      </div>
+      <div>
+        <span v-for="item in [1,5,10,15]">
+          {{ item }}
+        </span>
+      </div>
+      <!-- 文字列にv-forを使用 -->
+      <div>
+        <span v-for="item in text">{{ item }}</span>
+      </div>
+      <ul>
+        <li v-for="(item, index) in list" v-bind:key="item.id">
+          ID. {{ item.id }} {{ item.name }} HP. {{ item.hp }}
+        </li>
+      </ul>
+    <div>{{ $data }}</div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <!-- ajaxライブラリのaxiosを使用 -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

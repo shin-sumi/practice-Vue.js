@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>Vue.js App</title>
+  <link href="main.css" rel="stylesheet">
+</head>
+<body>
+  <div id="app">
+    <button v-on:click="toggle = !toggle">切り替え</button>
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+      <transition>
+        <my-circle v-bind:fill="fill" v-bind:key="fill"></my-circle>
+      </transition>
+    </svg>
+    <div>{{ $data }}</div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

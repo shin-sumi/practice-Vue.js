@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>Vue.js App</title>
+  <link href="main.css" rel="stylesheet">
+</head>
+<body>
+
+  <div id="app">
+    <my-component></my-component>
+
+    <!--
+      inline-template
+      text/x-template
+      これらはJavaScriptとHTMLがセットでなくなり、
+      ペアを見つけ出すのが困難になってしまう
+    -->
+    <my-component inline-template>
+      <p>inline-template</p>
+    </my-component>
+    <my-component-second></my-component-second>
+
+    <!--
+      描画関数
+    -->
+    <my-component-third></my-component-third>
+
+    <!--
+      以下の記述はNG
+      実際の描画はテンプレート部分は、tableの外に描画される
+      tableやselect要素などは、内部に持てる要素が制限される
+    -->
+    <table>
+      <tbody>
+        <my-component-fourth></my-component-fourth>
+      </tbody>
+    </table>
+    <!--
+      そのような要素の中にテンプレートを用いたい場合
+      is属性を使用してコンポーネント名を値として使用する
+    -->
+    <table>
+      <tbody>
+        <tr is="my-component-fourth"></tr>
+      </tbody>
+    </table>
+
+    
+    <div>{{ $data }}</div>
+  </div>
+  <script type="text/x-template" id="child-template">
+    <p>text/x-template+セレクタ</p>
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

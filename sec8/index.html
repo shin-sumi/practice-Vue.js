@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>Vue.js App</title>
+  <link href="main.css" rel="stylesheet">
+</head>
+<body>
+  <div id="app">
+    <p>Hello {{ message }}</p>
+    <p>{{ messageObj.value }}</p>
+    <p>{{ messageObj.value.length }}</p>
+    <p>{{ list[2] }}</p>
+    <p>{{ list[num] }}</p>
+    <!-- 式を記述できる -->
+    <p>{{ 1+1 }}</p>
+    <!--  
+      以下のような'文'はエラーになる
+      <p>{{ var foo = message }}</p>
+    -->
+    <p>{{ messageLength }}</p>
+    <p>{{ Math.round(message.length/3) }}</p>
+
+    <!-- 属性のバインディング -->
+    <!--
+      以下のように属性にMastacheを使っても展開されずエラーになる。
+      <input type="text" value="{{ message }}">
+    -->
+    <!-- 属性へのバインドはv-bindディレクティブを使用 -->
+    <input type="text" v-bind:value="message">
+    <!-- 以下のようにv-bindを省略して:だけでも良い -->
+    <input type="text" :value="message">
+    <!-- .prop修飾子はDOMプロパティと直接バインドする -->
+    <div v-bind:text-content.prop="message"></div>
+
+    <!--
+      .prop修飾子
+      属性ではなくDOMのscrollTopプロパティにバインド
+      インスタンスのデータのスクロールプロパティをインスタンスのライフサイクルフックmountedでscrollの値を100にしている
+      （main.js）
+    -->
+    <div v-bind:scroll-top.prop="scroll" style="height: 200px;overflow: auto">
+      <div style="height: 1000px;"></div>
+    </div>
+
+    <!--
+      .prop修飾子
+      属性名をcamelケースに変換する
+      （この場合つけないと、属性がview-boxで描画される）
+    -->
+    <svg v-bind:view-box.camel="svgViewBox" width="20" height="20" style="background: #eee">
+      <circle cx="10" cy="10" r="10" fill="blue" />
+    </svg>
+
+    <p>{{ count }}</p>
+    <button v-on:click="increment">increment</button>
+    <button v-on:click="incrementSecond">incrementSecond</button>
+    <button v-on:click="incrementThird">incrementThird</button>
+
+    <!-- クラスとスタイル属性へのバインドはオブジェクトや配列をバインドする -->
+    <!-- クラス名にハイフンを含む場合は "'" で囲む -->
+    <p v-bind:class="{child: isChild, 'is-active': isActive, is_open: isOpen}">class属性へのバインド</p>
+    <p v-bind:style="{color: textColor, backgroundColor: bgColor}">style属性へのバインド</p>
+
+    <!-- プレーンな属性との併用も可能 -->
+    <p class="child" v-bind:class="{'is-active': isActive}">プレーンなclass属性との併用</p>
+    <p style="color: blue;" v-bind:style="{backgroundColor: bgColor}">プレーンなstyle属性との併用</p>
+
+    <!--
+      クラスの条件に三項演算子の使用が可能
+      その際、配列リテラルを使用する
+      他のクラスも追加したい場合、配列に追加
+    -->
+    <p v-bind:class="[isActive ? 'is-active' : 'normal', {'other-class': isChild}]">クラス条件に三項演算子</p>
+    <button v-on:click="toggleActiveClass">is-activeクラスをtoggle</button>
+
+    <!-- dataオプションにオブジェクトを定義してスッキリさせる -->
+    <p v-bind:class="classObj">dataオプションにオブジェクトを定義（クラス）</p>
+    <p v-bind:style="styleObj">dataオプションにオブジェクトを定義（スタイル）</p>
+
+    <!-- 引数なしでオブジェクトを渡すことで一括でバインドできる -->
+    <img v-bind="item">
+
+    <!-- 以下のように一括でバインドしつつ、一部に変更を加えることも可能 -->
+    <img v-bind='item' v-bind:id="'thumb-'+item.id">
+
+    <div>
+      <!-- svgとのデータバインディング -->
+      <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+        <circle cx="100" cy="75" v-bind:r="radius" fill="lightpink" />
+      </svg>
+      <input type="range" min="0" max="100" v-model="radius">
+    </div>
+
+    <!-- 以下のように記述することで、現在のdataをJSON形式で出力できる -->
+    <pre>{{ $data }}</pre>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

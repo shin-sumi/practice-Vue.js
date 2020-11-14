@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>Vue.js App</title>
+  <link href="main.css" rel="stylesheet">
+</head>
+<body>
+  <div id="app" v-cloak>
+    <div>
+      <button v-on:click="show = !show">トグル</button>
+      <transition>
+        <div v-show="show">トランジションさせたい要素</div>
+      </transition>
+      <transition name="demo">
+        <div v-show="show">トランジションさせたい要素</div>
+      </transition>
+      <transition appear>
+        <div v-show="show">トランジションさせたい要素</div>
+      </transition>
+    </div>
+    <div>{{ $data }}</div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

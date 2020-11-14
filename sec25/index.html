@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>Vue.js App</title>
+  <link href="main.css" rel="stylesheet">
+</head>
+<body>
+  <div id="app">
+    <div>
+      <button v-on:click="changeParentDate">親側から変更</button>
+      <my-calendar v-model="parentDate"></my-calendar>
+      <!--
+        上記は以下の記述のシンタックスシュガー
+        v-modelを使ってデータバインディングすることで、inputイベントを紐づけ、
+        子のメソッドで$emitできる
+      -->
+      <my-calendar v-bind:value="parentDate" v-on:input="parentDate = $event"></my-calendar>
+    </div>
+    <div>
+      <button v-on:click="changeParentDateSecond">親側から変更</button>
+      <my-calendar-second v-bind:current="parentDateSecond" v-on:change="parentDateSecond = $event"></my-calendar-second>
+    </div>
+    <div>
+      <my-component v-bind:name.sync="name" v-bind:hp.sync="hp"></my-component>
+      <!--
+        上記は以下のシンタックスシュガー
+      -->
+      <my-component v-bind:name="name" v-on:update:name="name = $event" v-bind:hp="hp" v-on:update:hp="hp = $event"></my-component>
+    </div>
+    <div>{{ $data }}</div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

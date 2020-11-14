@@ -1,0 +1,18 @@
+/* StyleSheet */
+[v-cloak]{
+  display: none;
+}
+
+.v-enter-active, .v-leave-active{
+  transition: opacity 1s;
+}
+.v-enter, .v-leave-to{
+  opacity: 0;
+}
+
+.demo-enter-active, .demo-leave-active{
+  transition: opacity 2s;
+}
+.demo-enter, .demo-leave-to{
+  opacity: 0;
+}

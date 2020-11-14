@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>Vue.js App</title>
+  <link href="main.css" rel="stylesheet">
+</head>
+<body>
+  <div id="app" v-cloak>
+    <button v-on:click="appendToList">listに追加</button>
+    <button v-on:click="changeItemValue">item.valueを変更</button>
+    <button v-on:click="changeListProp">list内のオブジェクトのプロパティを変更</button>
+    <button v-on:click="changeValue">valueを変更</button>
+    <button v-on:click="appendToNumberList">numberListに追加</button>
+    <button v-on:click="changeText">textを変更</button>
+    <button v-on:click="incrementWidth">width増加</button>
+    <button v-on:click="incrementHeight">height増加</button>
+    <div>
+      <select v-model="current">
+        <option v-for="topic in topics" v-bind:value="topic.value" v-bind:key="topic.id">
+          {{ topic.name }}
+        </option>
+      </select>
+      <div v-for="item in repositoriesList">{{ item.full_name }}</div>
+    </div>
+    <div>{{ $data }}</div>
+  </div>
+  <!-- lodashの読み込み -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
+  <!-- ajaxライブラリのaxiosを使用 -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

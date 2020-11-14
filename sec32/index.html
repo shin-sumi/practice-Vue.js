@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>Vue.js App</title>
+  <link href="main.css" rel="stylesheet">
+</head>
+<body>
+  <div id="app">
+    <button v-on:click="show = !show">切り替え</button>
+    <transition v-on:enter="enter" v-on:after-enter="afterEnter" appear>
+      <div v-show="show">example</div>
+    </transition>
+    <transition v-on:leave="leave" v-on:after-leave="afterLeave" v-bind:css="false">
+      <div v-show="show">Vue.jsのトランジションクラスによる処理を無効にし、JavaScriptでcssを制御</div>
+    </transition>
+    <div>{{ $data }}</div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

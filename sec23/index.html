@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>Vue.js App</title>
+  <link href="main.css" rel="stylesheet">
+</head>
+<body>
+  <div id="app" v-cloak>
+    <!--
+      カスタムタグに属性を付与した場合、propsで受け取っていないものは、
+      子コンポーネントの属性として、上書き、複数の値を持てるものはマージされる
+    -->
+    <my-component v-bind:my-data="message" id="parent" class="parent"></my-component>
+    <ul>
+      <!--
+        コンポーネントに対してv-forディレクティブを使用
+      -->
+      <comp-li v-for="item in list"
+        v-bind:key="item.id"
+        v-bind:name="item.name"
+        v-bind:hp="item.hp"></comp-li>
+    </ul>
+
+    <!--
+      型指定したpropsにデータを渡す
+      1つ1つ引数を指定してデータを渡すより、
+      引数を省略してオブジェクトを渡すとスッキリする
+    -->
+    <example v-bind="example1"></example>
+    <!--
+      あえて、指定した型に合わない値を渡さなかったり、
+      必須となっているものや、デフォルト値が設定されているものを渡さずに試す
+      warnningが出る
+    -->
+    <example v-bind="example2"></example>
+    <div>
+      <!--
+        カスタムイベントが発生したら親のメソッドを呼び出す
+      -->
+      <child-button-comp v-on:childs-event="parentMethod"></child-button-comp>
+    </div>
+    <ul>
+      <comp-enemy v-for="item in list"
+        v-bind:key="item.id" 
+        v-bind="item" 
+        v-on:attack="handleAttack"></comp-enemy>
+    </ul>
+    <div>
+      <!--
+        カスタムタグに元々のイベントをそのまま紐づけても発火しない
+        コンポーネント側から$emitで呼び出さないとダメ
+        直接イベントを呼びたい場合、.native修飾子を利用する
+      -->
+      <test-click v-on:click="testHandleClick"></test-click>
+      <test-click v-on:click.native="testHandleClick"></test-click>
+    </div>
+    <div>
+      <dl>
+        <dt>component-a</dt>
+        <dd><component-a></component-a></dd>
+        <dt>component-b</dt>
+        <dd><component-b></component-b></dd>
+    </div>
+    <div>
+      <refs-example ref="child" v-on:click.native="refsExample"></refs-example>
+    </div>
+    <div>
+      <!--
+        子コンポーネントが引数を持って$emitを実行している場合、$event変数で使用できる
+        その際、1つしか引数として渡せないため、複数渡したい場合、オブジェクトにまとめるとよい
+      -->
+      <scope-example v-on:child-event="parentMethodSecond($event, parentData)"></scope-example>
+    </div>
+    <div>{{ $data }}</div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>Vue.js App</title>
+  <link href="main.css" rel="stylesheet">
+</head>
+<body>
+  <div id="app">
+    <div>
+      <button v-on:click="order = !order">切り替え</button>
+      <transition-group name="list" tag="ul">
+        <li v-for="item in sortedList" v-bind:key="item.id">
+          {{ item.name }} {{ item.price }}円
+        </li>
+      </transition-group>
+    </div>
+    <div>
+      HP. <input type="number" name="" v-model="limitHp">以下の敵
+      <transition-group tag="ul" name="enemyList">
+        <li v-for="item in filteredList" v-bind:key="item.id">
+          {{ item.name }} HP. {{ item.hp }}
+        </li>
+      </transition-group>
+    </div>
+    <div>{{ $data }}</div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
