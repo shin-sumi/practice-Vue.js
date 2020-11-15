@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>Vue.js App</title>
+  <link href="main.css" rel="stylesheet">
+</head>
+<body>
+  <div id="app">
+    <!-- v-ifで条件を満たさない場合、はDOMレベルで削除 -->
+    <p v-if="ok">if条件による描画</p>
+    <!-- v-ifで条件を満たさない場合、はstyleのdisplay: none -->
+    <p v-show="ok">show条件による描画</p>
+    <!--
+      templateタグによるv-ifグループ化
+      v-showでは使用できない
+    -->
+    <template v-if="ok">
+      <header>v-ifグループ化 header</header>
+      <div>v-ifグループ化 div</div>
+    </template>
+    <button v-on:click="ok = !ok">ok toggle</button>
+
+    <!-- v-else-if、及びv-else -->
+    <div v-if="type === 'A'">
+      type は A
+    </div>
+    <div v-else-if="type === 'B'">
+      type は B
+    </div>
+    <div v-else>
+      どちらでもない
+    </div>
+    <input v-model="type" type="text">
+
+    <!-- 条件分岐のkey -->
+    <div>
+      key属性あり
+      <div v-if="content" key="content-true">
+      <input type="" name="">
+      </div>
+      <div v-else key="content-false">
+        <input type="" name="">
+      </div> 
+    </div>
+
+    <div>
+      key属性なし
+      <div v-if="content">
+      <input type="" name="">
+      </div>
+      <div v-else>
+        <input type="" name="">
+      </div>
+    </div>
+    テキストエリアに値を入力して切り替えるとわかりやすい
+    key属性がある場合は、input含めた要素が再描画されており、ない場合は要素が再利用されている
+    
+    <!--
+      以下の公式にあるように小要素にもkey属性は使用できる
+      https://jp.vuejs.org/v2/guide/conditional.html
+    -->    
+    <button v-on:click="content = !content">toggle content</button>
+
+
+    <div>{{ $data }}</div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+/* StyleSheet */
+[v-cloak]{
+  display: none;
+}
+
+.v-enter-active, .v-leave-active{
+  transition: opacity 1s;
+}
+
+.v-leave-acttive{
+  position: absolute;
+}
+
+.v-enter, .v-leave-to{
+  opacity: 0;
+}

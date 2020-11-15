@@ -1,0 +1,10 @@
+/* StyleSheet */
+
+/*
+  cssのセレクタで、`#app[v-cloak]{...}`などと記述すればよい
+  インスタンス作成までMustacheなどがそのまま表示されるのを防ぐ例
+*/
+
+#second-app[v-cloak]{
+  display: none;
+}

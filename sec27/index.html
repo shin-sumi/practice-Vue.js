@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>Vue.js App</title>
+  <link href="main.css" rel="stylesheet">
+</head>
+<body>
+  <div id="app" v-cloak>
+    <functional-component v-bind:message="message">{{ message }}</functional-component>
+    <div>
+      <button v-on:click="current^=1">toggle</button>
+      <div v-bind:is="component"></div>
+    </div>
+    <div>
+      <my-component-c></my-component-c>
+      <my-component-d></my-component-d>
+    </div>
+    <div>
+      <my-component-e v-if="show"></my-component-e>
+      <button v-on:click="show = !show">テンプレートで付与したv-ifを変更</button>
+    </div>
+    <div>
+      <button v-on:click="boardCurrent = 'comp-board'">メッセージ一覧</button>
+      <button v-on:click="boardCurrent = 'comp-form'">投稿フォーム</button>
+      <!--
+        v-ifやis属性など使用した動的ポンポーネントで描画状態が切り替えられると、
+        インスタンスは破棄される。
+        <keep-alive>を使用すると、コンポーネントと状態を維持できる。
+      -->
+      <keep-alive>
+        <div v-bind:is="boardCurrent"></div>
+      </keep-alive>
+    </div>
+    <div>{{ $data }}</div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

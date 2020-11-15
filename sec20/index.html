@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>Vue.js App</title>
+  <link href="main.css" rel="stylesheet">
+</head>
+<body>
+  <div id="app" v-cloak>
+    <button v-on:click="list.push(list.length+1)">追加</button>
+    <ul ref="list">
+      <li v-for="item in list">{{ item }}</li>
+    </ul>
+    <div>{{ $data }}</div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

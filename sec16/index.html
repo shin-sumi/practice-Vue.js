@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>Vue.js App</title>
+  <link href="main.css" rel="stylesheet">
+</head>
+<body>
+  <div id="app" v-cloak>
+    <div>
+      <!--
+        算出プロパティは関数として定義するが、プロパティとして使用できる
+        テンプレートからの使い方
+      -->
+      {{ width }}の半分は{{ halfWidth }}
+      <button v-on:click="consoleHalfWidth">クリック</button>
+    </div>
+    <div>
+      <p>x: {{ halfPoint.x }}</p>
+      <p>y: {{ halfPoint.y }}</p>
+    </div>
+    <div>
+      <input v-model="width" type="number">{{ width }}<br>
+      <!--
+        算出プロパティは基本的には値を代入してもエラーになるが、セッターが用意されているので、
+        例えば、以下のようにinputにバインディングさせることもできる
+
+        算出プロパティ halfWidthSec にゲッター、セッターを定義
+      -->
+      <input v-model="halfWidthSec" type="number">{{ halfWidth }}
+    </div>
+    <div>
+      <!--
+        算出プロパティのキャッシュ機能
+        以下は、前者の算出プロパティは1個目も2個目も同じ数字になる
+        算出プロパティはリアクティブなデータが更新されたときのみ再評価される
+        Math.random()はリアクティブなデータではないため、2度と更新されない
+        反対に、メソッドは常に関数を実行する
+      -->
+      <ol>
+        <li>{{ computedRandom }}</li>
+        <li>{{ computedRandom }}</li>
+      </ol>
+      <ol>
+        <li>{{ methodsRandom() }}</li>
+        <li>{{ methodsRandom() }}</li>
+      </ol>
+    </div>
+
+    <div>
+      <input type="number" v-model.number="budget"> 円以下に絞り込む
+      <input type="number" v-model.number="limit"> 件を表示
+      <button v-on:click="order = !order">昇順降順切替</button>
+      <ul>
+        <li v-for="item in filteredList" v-bind.key="item.id">{{ item.name }} {{ item.price }}円</li>
+      </ul>
+    </div>
+    <div>{{ $data }}</div>
+  </div>
+  <!--
+    lodashの読み込み
+  -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

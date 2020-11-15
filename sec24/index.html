@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>Vue.js App</title>
+  <link href="main.css" rel="stylesheet">
+</head>
+<body>
+  <div id="app" v-cloak>
+    <!--
+      親側でスロットコンテンツが定義されない場合、
+      子のテンプレートで設定したslotタグの内側が表示される
+    -->
+    <comp-child-first></comp-child-first>
+    <comp-child-first>{{ message }}</comp-child-first>
+    <comp-child-second>
+      <!--
+        slot属性があるタグ外にコンテンツをいれても、
+        まとめてname属性なしのslotタグの部分に描画される
+      -->
+      slot属性があるタグの外その1
+      <span slot="header">
+        Helo Vue.js!
+      </span>
+      slot属性があるタグの外その2
+    </comp-child-second>
+    <comp-child-second>
+      <template slot="footer">
+        テンプレート通りの順番じゃなくても、<br>
+        描画はテンプレート通りに描画される。
+      </template>
+      <template slot="header">
+        templateタグを使用
+      </template>
+    </comp-child-second>
+    <comp-child-third>
+      <template slot="test-slot" slot-scope="props">
+        {{ props.text }}
+      </template>
+    </comp-child-third>
+    <comp-child-fourth>
+      <li slot-scope="props">{{ props.item }}</li>
+    </comp-child-fourth>
+    <div>{{ $data }}</div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

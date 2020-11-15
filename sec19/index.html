@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>Vue.js App</title>
+  <link href="main.css" rel="stylesheet">
+</head>
+<body>
+  <div id="app" v-cloak>
+    <!--
+      登録したカスタムディレクティブは、v- プレフィックスをつけて呼び出す
+    -->
+    <input type="text" v-focus v-click v-example v-example2>
+    <div>
+      <button v-on:click="video1 = true">再生</button>
+      <button v-on:click="video1 = false">停止</button>
+      <video src="movie1.mp4" v-video="video1"></video>
+      <button v-on:click="video2 = true">再生</button>
+      <button v-on:click="video2 = false">停止</button>
+      <video src="movie2.mp4" v-video="video2"></video>
+    </div>
+    <div>{{ $data }}</div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

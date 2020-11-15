@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>Vue.js App</title>
+  <link href="main.css" rel="stylesheet">
+</head>
+<body>
+  <div id="app">
+    <div>
+      <button v-on:click="show = !show">トグル</button>
+      <div class="container">
+        <div class="left-box">
+          <transition>
+            <div v-show="show">要素</div>
+          </transition>
+          <transition name="different" appear>
+            <div v-show="show">要素</div>
+          </transition>
+          <transition name="group">
+            <div v-if="show" key="a">TRUE</div>
+            <div v-else key="b">FALSE</div>
+          </transition>
+        </div>
+        <div class="right-box">
+          <div class="mode-parent">
+            <transition name="mode">
+              <div v-if="show" key="a">normal TRUE</div>
+              <div v-else key="b">normal FALSE</div>
+            </transition>
+          </div>
+          <div class="mode-parent">
+            <transition name="mode" mode="out-in">
+              <div v-if="show" key="a">out-in TRUE</div>
+              <div v-else key="b">out-in FALSE</div>
+            </transition>
+          </div>
+          <div class="mode-parent">
+            <transition name="mode" mode="in-out">
+              <div v-if="show" key="a">in-out TRUE</div>
+              <div v-else key="b">in-out FALSE</div>
+            </transition>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <button v-on:click="count++">切り替え</button>
+      <transition name="key">
+        <div v-bind:key="count">count: {{ count }}</div>
+      </transition>
+      <transition name="key">
+        <my-label v-bind:key="count" v-bind:count="count"></my-label>
+      </transition>
+    </div>
+    <div>{{ $data }}</div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

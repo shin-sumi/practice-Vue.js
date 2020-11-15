@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>Vue.js App</title>
+  <link href="main.css" rel="stylesheet">
+</head>
+<body>
+  <div id="app">
+    <div>
+      <!--
+        v-pre
+        自身と子コンポーネントのHTMLのコンパイルをスキップ
+      -->
+      <a v-bind:href="url" v-pre>{{ message }}</a>
+    </div>
+
+    <div>
+      <!-- 
+        v-once
+        初回だけバインディングを行う
+      -->
+      <a v-bind:href="url" v-once>{{ message }}</a>
+      <button v-on:click="changeMessage">message変更</button>
+    </div>
+
+    <div>
+      <!--
+        v-text
+        単一のMustacheの身の場合、代わりにテキストコンテンツをバインドできる
+      -->
+      <span v-text="message"></span>
+    </div>
+    <div>
+      <!--
+        v-html
+        htmlタグをそのまま表示
+        XSS脆弱性を引き起こすため扱いに注意
+      -->
+      <span v-html>{{ htmlMessage }}</span>
+    </div>
+    <div>{{ $data }}</div>
+  </div>
+
+  <div id="second-app" v-cloak>
+    <!--
+      v-cloak
+      インスタンスの準備が終わると取り除かれる
+      インスタンス作成までMustacheなどがそのまま表示されるのを防ぐ（例はcssファイルに）
+    -->
+    <span>{{ message }}</span>
+    <div>{{ $data }}</div>
+  </div>
+
+  <div id="third-app">
+    <!--
+      仮想DOMの再利用による副作用
+      以下では、inputに何か値が入力されていると、testDataが更新されてもDOMの更新の必要がなく、
+      仮想DOMが再利用されて、値は保持されたままになる
+    -->
+    <div v-if="testData">
+      A <input type="text">
+    </div>
+    <div v-else>
+      B <input type="text">
+    </div>
+    <!--
+      以下のように、更新が必要な要素、またはそれを包含する要素にkey属性を与えて区別させることにより、更新させることができる
+    -->
+    <div v-if="testData">
+      A <input type="test" key="a">
+    </div>
+    <div v-else>
+      B <input type="test" key="b">
+    </div>
+    <button v-on:click="toggleTestData">testData toggle</button>
+    <div>{{ $data }}</div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

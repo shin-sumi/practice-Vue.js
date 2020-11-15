@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>Vue.js App</title>
+  <link href="main.css" rel="stylesheet">
+</head>
+<body>
+  <div id="app" v-cloak>
+    <button v-on:click="handleClick">クリック</button>
+    <!-- 以下のように省略して記述可能 -->
+    <button @click="handleClick">クリック</button>
+    
+    <!-- インラインで式を記述可能 -->
+    <button v-on:click="count++">count増加</button>
+    
+    <!-- メソッドにイベントとスコープ内プロパティを渡す -->
+    <button v-on:click="handleClickSecond($event, item)">クリック</button>
+
+    <!-- 画像ロードでプロパティの値変更 -->
+    <img src="image.jpg" v-on:load="show=true" v-bind:class="{hide: !show}">
+
+    <!-- 他イベント使用例 -->
+    <div class="box" v-on:scroll="handleScroll($event)" v-on:mousewheel="handleMousewheel($event)" v-on:dragstart="handleDragstart($event)" draggable>
+      <div class="boxInner">中身</div>
+    </div>
+
+    <div>
+      <!--
+        フォームの入力内容を取得にv-onを使用することにより、
+        プロパティに代入前に処理をいれることができる
+      -->
+      <input v-on:input="handleInput" type="text">
+    </div>
+    <div>
+      <!--
+        イベント修飾子
+        .right: 右クリックのときのみハンドラを呼び出す
+        .prevent: event.preventDefault()を呼ぶ
+      -->
+      <div v-on:click.right="rightClickHandler($event)">example</div>
+      <!-- この場合、イベントをキャンセルして右クリック時のコンテキストメニューを表示させない -->
+      <div v-on:click.right.prevent="rightClickHandler($event)">example</div>
+
+      <!--
+        .stop: event.stopPropagation()を呼ぶ
+        親要素へのバブリングの停止
+      -->
+      <div v-on:click="handler('div1')">
+        div1
+        <div v-on:click.stop="handler('div2')">
+          div2
+        </div>
+      </div>
+
+      <!--
+        .prevent: event.preventDefault()を呼ぶ
+        イベントのキャンセル
+        Vue.jsの話ではないが、親要素へのバブリングは止めない、ハッシュは更新されない
+      -->
+      <div v-on:click="handler('div')">
+        <a v-on:click.prevent="handler('a')" href="#top">a</a>
+      </div>
+
+      <!--
+        .capture キャプチャーモードでイベントを発生
+        これもVue.jsの話ではないが、以下の場合div1 > div3 > div2の順でイベントが発生
+      -->
+      <div v-on:click.capture="handler('div1')">
+        div1
+        <div v-on:click="handler('div2')">
+          div2
+          <div v-on:click="handler('div3')">
+            div3
+          </div>
+        </div>
+      </div>
+
+      <!--
+        .self event.targetが自身の要素の時のみハンドラを呼ぶ
+        モーダルのオーバーレイクリック時などに使用できる
+        以下の場合、内側のdiv2をクリックしても、div1のイベントは呼ばれない
+      -->
+      <div v-on:click.self="handler('div1')">
+        div1
+        <div v-on:click="handler('div2')">div2</div>
+      </div>
+
+      <!--
+        .native
+        コンポーネントのルート要素のイベントを発火
+        Chapter5で
+      -->
+
+      <!--
+        .passive passive: trueでイベントリスナを設定
+        これもVue.jsの話ではないが、、、
+        event.preventDefault()を使用しないことを明示的にする
+        
+        スクロールジャンクを防ぐときに...
+        https://leap-in.com/ja/use-passive-true-avoid-janky/
+      -->
+    </div>
+
+    <div>
+      <!--
+        キー修飾子
+        以下の場合いずれもエンターキーが押された時のみhandlerが呼ばれる
+      -->
+      <input v-on:keydown.13="handler" type="text">
+      <input v-on:keydown.enter="handler" type="text">
+
+      <!--
+        複数設定でor
+        以下の場合矢印キーいずれかが押された時
+      -->
+      <input v-on:keydown.up.down.left.right="handler" type="">
+
+      <div>
+        <!--
+          システム修飾子
+          対応するキーがおされているときのみhandlerが呼ばれる
+          以下の場合、shiftキーを押しながらクリックした場合
+        -->
+        <input v-on:click.shift="handler" type="">
+      </div>
+    </div>
+    <div>{{ $data }}</div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

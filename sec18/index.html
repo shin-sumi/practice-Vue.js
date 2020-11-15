@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>Vue.js App</title>
+  <link href="main.css" rel="stylesheet">
+</head>
+<body>
+  <div id="app">
+    <!--
+      フィルタはMustacheかv-bindディレクティブの値に | でフィルタ名をつなげることで呼び出せる
+    -->
+    <div>{{ price | localNum }}円</div>
+    <div v-bind:id="message | lowerCase">Vue.js</div>
+
+    <!--
+      フィルタに引数を持たせる
+    -->
+    <div>{{ message | consoleLog(foo, 100) }}</div>
+    
+    <!--
+      パイプでつなげてメソッドチェーンのように使用
+    -->
+    <div>{{ 180 | radian | round }}</div>
+    <div>{{ $data }}</div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

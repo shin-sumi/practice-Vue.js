@@ -1,0 +1,107 @@
+/* StyleSheet */
+[v-cloak]{
+  display: none;
+}
+.container{
+  display: flex;
+}
+.left-box{
+  width: 300px;
+  margin-right: 20px;
+}
+.right-box{
+  width: 300px;
+}
+.mode-parent{
+  position: relative;
+  height: 50px;
+}
+.count-parent{
+  position: relative;
+}
+
+/*
+  トランジション中有効にするtransitionプロパティ
+*/
+.v-enter-active,
+.v-leave-to{
+  transition: opacity 1s;
+}
+
+.v-enter{
+  opacity: 0;
+}
+.v-enter-to{
+  opacity: 1;
+}
+
+.v-leave{
+  opacity: 1;
+}
+.v-leave-to{
+  opacity: 0;
+}
+
+/*
+  .v-enter-toと.v-leaveのopacityプロパティは初期値で不要だし、
+  .v-enterと.v-leave-toはまとめて記述できるので以下のように省略
+*/
+
+.v-enter,
+.v-leave-to{
+  opacity: 0;
+}
+
+.different-enter-active,
+.different-leave-active{
+  transition: opacity 1s, transform 1s;
+}
+
+.different-enter{
+  opacity: 0;
+  transform: translateX(-10px);
+}
+
+.different-leave-to{
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.group-enter-active,
+.group-leave-active{
+  transition: opacity 1s, transform 1s;
+}
+.group-leave-active{
+  position: absolute;
+}
+.group-enter{
+  opacity: 0;
+  transform: translateX(-20px);
+}
+.group-leave-to{
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.mode-enter-active,
+.mode-leave-active{
+  transition: opacity 1s;
+}
+.mode-leave-active{
+  position: absolute;
+}
+.mode-enter,
+.mode-leave-to{
+  opacity: 0;
+}
+
+.key-enter-active,
+.key-leave-active{
+  transition: opacity 1s;
+}
+.key-leave-active{
+  position: absolute;
+}
+.key-enter, .key-leave-to{
+  opacity: 0;
+}

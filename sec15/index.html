@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>Vue.js App</title>
+  <link href="main.css" rel="stylesheet">
+</head>
+<body>
+  <div id="app" v-cloak>
+    <div style="height: 1000px"></div>
+    <!--
+      マウント要素外の操作、イベント
+      メインはmain.jsの方に処理、コメントあり
+      例は、windowにscrollイベントを紐づけて、要素にクラスのつけ外しを行う
+    -->
+    <div v-bind:class="{ fixed: scrollY > 200 }"></div>
+
+    <!--      
+      ライブラリを利用したスムーススクロールの実装
+    -->
+    <div v-on:click="scrollTop">ページ上部へ移動</div>
+
+    <!--
+      どうしてもjQueryなど他のライブラリを併用する場合、
+      JavaScriptのdispatchEventを利用してイベントを検知させる
+    -->
+    <div>
+      <input id="message" type="text" v-on:input="handleInput($event)">
+      <button data-update="jQuery">jQueryから更新</button>
+    </div>
+    <div>{{ $data }}</div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <!--
+    Smooth Scrollライブラリの読み込み
+  -->
+  <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@12.1.5"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

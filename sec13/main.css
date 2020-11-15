@@ -1,0 +1,19 @@
+/* StyleSheet */
+[v-cloak]{
+  display: none;
+}
+img{
+  opacity: 1;
+  transition: 1s;
+  width: 100px;
+}
+img.hide{
+  opacity: 0;
+}
+.box{
+  height: 200px;
+  overflow-y: scroll;
+}
+.box div{
+  height: 300px;
+}
