@@ -3,9 +3,13 @@ import products from '@/api/products.js'
 export default {
   namespaced: true,
   state: {
+    list: products.fetch(),
     detail: {}
   },
   getters: {
+    list: (state) => {
+      return state.list
+    },
     detail: (state) => {
       return state.detail
     }

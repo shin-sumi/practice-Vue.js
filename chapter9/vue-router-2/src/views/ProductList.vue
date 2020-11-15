@@ -10,10 +10,10 @@
 </template>
 
 <script>
-import products from '@/api/products.js'
+import { mapGetters } from 'vuex'
 export default {
   computed: {
-    list: () => products.fetch()
+    ...mapGetters('product', ['list'])
   }
 }
 </script>
