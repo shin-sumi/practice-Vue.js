@@ -37,7 +37,12 @@ const router = new VueRouter({
         {
           name: 'review-detail',
           path: 'review/:rid',
-          component: ProductReviewDetail
+          component: ProductReviewDetail,
+          props: (route) => {
+            return {
+              rid: Number(route.params.id)
+            }
+          }
         }
       ]
     }

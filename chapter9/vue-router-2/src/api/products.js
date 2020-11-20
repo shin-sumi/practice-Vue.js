@@ -8,7 +8,7 @@ const database = [
       {
         id: 1,
         reviewer: 'Aaron',
-        comment: '商品A良い',
+        comment: '商品A非常に良い',
         evaluation: 5
 
       },
@@ -34,21 +34,21 @@ const database = [
     reviews: [
       {
         id: 1,
-        reviewer: 'Aaron',
-        comment: '商品B良い',
-        evaluation: 5
+        reviewer: 'Abbie',
+        comment: '商品Bあまり良くない',
+        evaluation: 2
       },
       {
         id: 2,
-        reviewer: 'Cyrus',
-        comment: '商品B普通',
-        evaluation: 3
+        reviewer: 'Claudia',
+        comment: '商品Bまあまあ良い',
+        evaluation: 4
       },
       {
         id: 3,
-        reviewer: 'Harold',
-        comment: '商品B良くない',
-        evaluation: 1
+        reviewer: 'Gloria',
+        comment: '商品Bあまり良くない',
+        evaluation: 2
       }
     ]
   },
@@ -60,21 +60,21 @@ const database = [
     reviews: [
       {
         id: 1,
-        reviewer: 'Aaron',
-        comment: '商品C良い',
-        evaluation: 5
-      },
-      {
-        id: 2,
-        reviewer: 'Cyrus',
+        reviewer: 'Avdotya',
         comment: '商品C普通',
         evaluation: 3
       },
       {
+        id: 2,
+        reviewer: 'Ivanna',
+        comment: '商品Cまあまあ良い',
+        evaluation: 4
+      },
+      {
         id: 3,
-        reviewer: 'Harold',
-        comment: '商品C良くない',
-        evaluation: 1
+        reviewer: 'Pulkheriya',
+        comment: '商品C非常に良い',
+        evaluation: 5
       }
     ]
   }
