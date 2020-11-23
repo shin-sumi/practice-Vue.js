@@ -91,5 +91,11 @@ export default {
     setTimeout(() => {
       callback(database.find(el => el.id === id))
     }, 1000)
+  },
+  asyncFindReview (id, reviewId, callback) {
+    setTimeout(() => {
+      let item = this.find(id)
+      callback(item.reviews.find(el => el.id === reviewId))
+    }, 1000)
   }
 }
