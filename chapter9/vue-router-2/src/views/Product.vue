@@ -2,13 +2,10 @@
   <div>
     <div class="product" v-if="isDetailEmpty" key="product">
       <h1>{{ detail.name }}</h1>
-      <nav class="nav">
-        <router-link :to="{ name: 'product-review' }" exact>レビュー</router-link>
-      </nav>
       <router-view />
     </div>
     <div v-else key="loading">商品情報を読み込んでいます。</div>
-    <router-link :to="{path: '/product'}" exact>一覧へ</router-link>
+    <router-link :to="{path: '/product'}" exact>商品一覧へ</router-link>
   </div>
 </template>
 

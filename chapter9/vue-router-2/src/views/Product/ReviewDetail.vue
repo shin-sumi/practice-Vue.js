@@ -12,6 +12,12 @@
       <dt>コメント</dt>
       <dd>{{ reviewDetail.comment }}</dd>
     </dl>
+    <div>
+      <router-link :to="{ name: 'product-review' }" exact>レビュー一覧へ</router-link>
+    </div>
+    <div>
+      <router-link :to="{ name: 'product-home' }" exact>商品詳細へ</router-link>
+    </div>
   </div>
 </template>
 
