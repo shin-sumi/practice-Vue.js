@@ -13,10 +13,10 @@
       <dd>{{ reviewDetail.comment }}</dd>
     </dl>
     <div>
-      <router-link :to="{ name: 'product-review' }" exact>レビュー一覧へ</router-link>
+      <router-link :to="{ name: 'product-review' }" exact>{{ detail.name }}のレビュー一覧へ</router-link>
     </div>
     <div>
-      <router-link :to="{ name: 'product-home' }" exact>商品詳細へ</router-link>
+      <router-link :to="{ name: 'product-home' }" exact>{{ detail.name }}の商品詳細へ</router-link>
     </div>
   </div>
 </template>
@@ -32,7 +32,7 @@ export default{
     isReviewDetailEmpty () {
       return !!Object.keys(this.detail).length
     },
-    ...mapGetters('product', ['reviewDetail'])
+    ...mapGetters('product', ['detail', 'reviewDetail'])
   },
   watch: {
     rid: {
