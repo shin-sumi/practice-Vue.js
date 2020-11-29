@@ -3,11 +3,19 @@ import products from '@/api/products.js'
 export default {
   namespaced: true,
   state: {
-    detail: {}
+    list: products.fetch(),
+    detail: {},
+    reviewDetail: {}
   },
   getters: {
+    list: (state) => {
+      return state.list
+    },
     detail: (state) => {
       return state.detail
+    },
+    reviewDetail: (state) => {
+      return state.reviewDetail
     }
   },
   mutations: {
@@ -16,6 +24,12 @@ export default {
     },
     clear (state) {
       state.detail = {}
+    },
+    reviewSet (state, { detail }) {
+      state.reviewDetail = detail
+    },
+    reviewClear (state) {
+      state.reviewDetail = {}
     }
   },
   actions: {
@@ -26,6 +40,14 @@ export default {
     },
     destroy ({ commit }) {
       commit('clear')
+    },
+    reviewLoad ({ commit }, {id, reviewId}) {
+      products.asyncFindReview(id, reviewId, detail => {
+        commit('reviewSet', { detail })
+      })
+    },
+    reviewDestroy ({ commit }) {
+      commit('reviewClear')
     }
   }
 }

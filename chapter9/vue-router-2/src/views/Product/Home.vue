@@ -1,9 +1,18 @@
 <template>
   <div class="product-home">
-    <h2>商品Home</h2>
+    <div>{{ detail.content }}</div>
+    <div>{{ detail.price }}円</div>
+    <nav class="nav">
+        <router-link :to="{ name: 'product-review' }" exact>{{ detail.name }}のレビュー一覧へ</router-link>
+      </nav>
   </div>
 </template>
 
 <script>
-export default {}
+import { mapGetters } from 'vuex'
+export default {
+  computed: {
+    ...mapGetters('product', ['detail'])
+  }
+}
 </script>
