@@ -13,7 +13,14 @@ Vue.use(VueRouter)
 const router = new VueRouter({
   mode: 'history',
   routes: [
-    {path: '/', component: Home},
+    {
+      path: '/',
+      component: Home,
+      beforeEnter (to, from, next) {
+        console.log('route:beforeEnter')
+        next()
+      }
+    },
     {path: '/product', component: ProductList},
     {
       path: '/product/:id(\\d+)',
