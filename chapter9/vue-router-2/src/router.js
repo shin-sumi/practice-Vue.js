@@ -13,7 +13,14 @@ Vue.use(VueRouter)
 const router = new VueRouter({
   mode: 'history',
   routes: [
-    {path: '/', component: Home},
+    {
+      path: '/',
+      component: Home,
+      beforeEnter (to, from, next) {
+        console.log('route:beforeEnter')
+        next()
+      }
+    },
     {path: '/product', component: ProductList},
     {
       path: '/product/:id(\\d+)',
@@ -48,6 +55,20 @@ const router = new VueRouter({
       ]
     }
   ]
+})
+
+router.beforeEach((to, from, next) => {
+  console.log('global:beforeEach')
+  next()
+})
+
+router.beforeResolve((to, from, next) => {
+  console.log('global:beforeResolve')
+  next()
+})
+
+router.afterEach((to, from, next) => {
+  console.log('global:afterEach')
 })
 
 export default router
