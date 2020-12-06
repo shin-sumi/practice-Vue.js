@@ -32,6 +32,26 @@ export default{
   },
   beforeDestroy () {
     this.$store.dispatch('product/destroy')
+  },
+
+  beforeRouteEnter (to, from, next) {
+    /*
+      beforeRouteEnterではコンポーネントのインスタンス（this）にアクセスできない（undefinedになる）
+      console.log(this)
+
+      以下のようにnextのコールバックの引数としてアクセスできる
+    */
+    next((vm) => {
+      console.log('component:beforeRouteEnter', vm)
+    })
+  },
+  beforeRouteUpdate (to, from, next) {
+    console.log('component:beforeRouteUpdate', this)
+    next()
+  },
+  beforeRouteLeave (to, from, next) {
+    console.log('component:beforeRouteLeave', this)
+    next()
   }
 }
 </script>
