@@ -2,7 +2,11 @@
   <div>
     <div class="product" v-if="isDetailEmpty" key="product">
       <h1>{{ detail.name }}</h1>
-      <router-view />
+      <div class="detail-content-parent">
+        <transition name="view">
+          <router-view />
+        </transition>
+      </div>
     </div>
     <div v-else key="loading">商品情報を読み込んでいます。</div>
     <router-link :to="{path: '/product'}" exact>商品一覧へ</router-link>
@@ -55,3 +59,21 @@ export default{
   }
 }
 </script>
+
+<style scoped>
+  .detail-content-parent{
+    position: relative;
+  }
+  .detail-content-parent >>> h2{
+    margin-top: 0;
+  }
+  .view-enter-active, .view-leave-active{
+    transition: opacity 0.5s;
+  }
+  .view-leave-active{
+    position: absolute;
+  }
+  .view-enter, .view-leave-to{
+    opacity: 0;
+  }
+</style>
