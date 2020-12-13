@@ -57,18 +57,4 @@ const router = new VueRouter({
   ]
 })
 
-router.beforeEach((to, from, next) => {
-  console.log('global:beforeEach')
-  next()
-})
-
-router.beforeResolve((to, from, next) => {
-  console.log('global:beforeResolve')
-  next()
-})
-
-router.afterEach((to, from, next) => {
-  console.log('global:afterEach')
-})
-
 export default router

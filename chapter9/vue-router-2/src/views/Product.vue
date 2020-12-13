@@ -6,6 +6,7 @@
         <transition name="view">
           <router-view />
         </transition>
+        <loading-overlay />
       </div>
     </div>
     <div v-else key="loading">商品情報を読み込んでいます。</div>
@@ -15,6 +16,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import LoadingOverlay from '@/views/LoadingOverlay.vue'
 export default{
   props: {
     id: Number
@@ -33,6 +35,9 @@ export default{
       },
       immediate: true
     }
+  },
+  components: {
+    'loading-overlay': LoadingOverlay
   },
   beforeDestroy () {
     this.$store.dispatch('product/destroy')
