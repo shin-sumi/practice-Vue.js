@@ -17,10 +17,17 @@ export default {
 </script>
 
 <style scoped>
+  .loading{
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+  }
   .loading-enter-active{
     transition: all 0.25s;
+    opacity: 1;
   }
   .loading-leave-active{
     transition: all 0.5s ease 0.5s;
+    opacity: 0;
   }
 </style>

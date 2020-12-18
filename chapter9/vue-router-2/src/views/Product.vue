@@ -72,6 +72,11 @@ export default{
   .detail-content-parent >>> h2{
     margin-top: 0;
   }
+  .detail-content-parent >>> .loading{
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
   .view-enter-active, .view-leave-active{
     transition: opacity 0.5s;
   }

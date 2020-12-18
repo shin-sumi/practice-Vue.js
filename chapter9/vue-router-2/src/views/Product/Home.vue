@@ -13,6 +13,9 @@ import { mapGetters } from 'vuex'
 export default {
   computed: {
     ...mapGetters('product', ['detail'])
+  },
+  beforeRouteEnter (to, from, next) {
+    setTimeout(next, 1000)
   }
 }
 </script>
