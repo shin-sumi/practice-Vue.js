@@ -15,7 +15,11 @@ export default {
     ...mapGetters('product', ['detail'])
   },
   beforeRouteEnter (to, from, next) {
-    setTimeout(next, 1000)
+    if (['product-review', 'review-detail'].includes(from.name)) {
+      setTimeout(next, 1000)
+    } else {
+      next()
+    }
   }
 }
 </script>
