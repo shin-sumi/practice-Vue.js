@@ -44,6 +44,9 @@ export default{
   },
   beforeDestroy () {
     this.$store.dispatch('product/reviewDestroy')
+  },
+  beforeRouteEnter (to, from, next) {
+    setTimeout(next, 1000)
   }
 }
 </script>

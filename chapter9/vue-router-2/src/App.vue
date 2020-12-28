@@ -8,7 +8,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
   .router-link-active {
     background-color: #e25193;
   }

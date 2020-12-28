@@ -13,6 +13,13 @@ import { mapGetters } from 'vuex'
 export default {
   computed: {
     ...mapGetters('product', ['detail'])
+  },
+  beforeRouteEnter (to, from, next) {
+    if (['product-review', 'review-detail'].includes(from.name)) {
+      setTimeout(next, 1000)
+    } else {
+      next()
+    }
   }
 }
 </script>
