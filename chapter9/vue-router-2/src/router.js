@@ -7,6 +7,7 @@ import Product from '@/views/Product.vue'
 import ProductHome from '@/views/Product/Home.vue'
 import ProductReview from '@/views/Product/Review.vue'
 import ProductReviewDetail from '@/views/Product/ReviewDetail.vue'
+import ProductLoadBeforeTransition from '@/views/Product/LoadBeforeTransition.vue'
 
 Vue.use(VueRouter)
 
@@ -53,6 +54,16 @@ const router = new VueRouter({
           }
         }
       ]
+    },
+    {
+      name: 'product-load-before-transition',
+      path: '/home-load-before/:id(\\d+)',
+      component: ProductLoadBeforeTransition,
+      props: (route) => {
+        return {
+          id: Number(route.params.id)
+        }
+      }
     }
   ]
 })
