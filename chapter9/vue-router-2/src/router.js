@@ -9,6 +9,8 @@ import ProductReview from '@/views/Product/Review.vue'
 import ProductReviewDetail from '@/views/Product/ReviewDetail.vue'
 import ProductLoadBeforeTransition from '@/views/Product/LoadBeforeTransition.vue'
 
+const About = () => import('@/views/About.vue')
+
 Vue.use(VueRouter)
 
 const router = new VueRouter({
@@ -64,7 +66,8 @@ const router = new VueRouter({
           id: Number(route.params.id)
         }
       }
-    }
+    },
+    {path: '/about', component: About}
   ]
 })
 
