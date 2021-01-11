@@ -2,12 +2,13 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import Home from '@/views/Home.vue'
-import ProductList from '@/views/ProductList'
+import ProductList from '@/views/ProductList.vue'
 import Product from '@/views/Product.vue'
 import ProductHome from '@/views/Product/Home.vue'
 import ProductReview from '@/views/Product/Review.vue'
 import ProductReviewDetail from '@/views/Product/ReviewDetail.vue'
 import ProductLoadBeforeTransition from '@/views/Product/LoadBeforeTransition.vue'
+import User from '@/views/User.vue'
 
 const About = () => import('@/views/About.vue')
 
@@ -67,7 +68,14 @@ const router = new VueRouter({
         }
       }
     },
-    {path: '/about', component: About}
+    {path: '/about', component: About},
+    {
+      path: '/user',
+      component: User,
+      meta: {
+        requiresAuth: true
+      }
+    }
   ]
 })
 
