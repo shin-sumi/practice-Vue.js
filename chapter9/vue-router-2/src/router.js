@@ -2,11 +2,15 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import Home from '@/views/Home.vue'
-import ProductList from '@/views/ProductList'
+import ProductList from '@/views/ProductList.vue'
 import Product from '@/views/Product.vue'
 import ProductHome from '@/views/Product/Home.vue'
 import ProductReview from '@/views/Product/Review.vue'
 import ProductReviewDetail from '@/views/Product/ReviewDetail.vue'
+import ProductLoadBeforeTransition from '@/views/Product/LoadBeforeTransition.vue'
+import User from '@/views/User.vue'
+
+const About = () => import('@/views/About.vue')
 
 Vue.use(VueRouter)
 
@@ -53,8 +57,34 @@ const router = new VueRouter({
           }
         }
       ]
+    },
+    {
+      name: 'product-load-before-transition',
+      path: '/home-load-before/:id(\\d+)',
+      component: ProductLoadBeforeTransition,
+      props: (route) => {
+        return {
+          id: Number(route.params.id)
+        }
+      }
+    },
+    {path: '/about', component: About},
+    {
+      path: '/user',
+      component: User,
+      meta: {
+        requiresAuth: true
+      }
     }
-  ]
+  ],
+  scrollBehavior (to, from, savedPosition) {
+    if (savedPosition) {
+      console.log(savedPosition)
+      return savedPosition
+    } else {
+      return {x: 0, y: 0}
+    }
+  }
 })
 
 export default router

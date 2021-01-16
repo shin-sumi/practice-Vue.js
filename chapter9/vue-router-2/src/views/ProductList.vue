@@ -6,6 +6,12 @@
         <router-link :to="`/product/${ id }`">{{ name }}</router-link>
       </li>
     </ul>
+    <h2>遷移前にデータ読み込み版</h2>
+    <ul>
+      <li v-for="{ id, name } in list" :key="id">
+        <router-link :to="`/home-load-before/${ id }`">{{ name }}</router-link>
+      </li>
+    </ul>
   </div>
 </template>
 

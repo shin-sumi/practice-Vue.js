@@ -20,7 +20,21 @@ const store = new Vuex.Store({
 router.beforeEach((to, from, next) => {
   console.log('global:beforeEach')
   store.commit('loading/start')
-  next()
+  // 親も含めてメタフィールドにrequiresAuthがあるルートか
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    console.log('認証が必要なルート')
+    // 認証用APIはいったん省略
+    // if (!auth.loggedIn()) {
+    //   next({
+    //     path: 'login/',
+    //     query: {redirect: to.fullpath}
+    //   });
+    // } else {
+    next()
+    // }
+  } else {
+    next()
+  }
 })
 
 router.beforeResolve((to, from, next) => {
